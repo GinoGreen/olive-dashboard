@@ -37,6 +37,7 @@ export interface OilAnalysis {
 	polyphenols: number; // contenuto polifenoli
 	alkylEsters: number; // alchil esteri
 	organolepticsScore: number; // valutazione panel test
+	qualityCertification: QualityCertification;
 }
 
 // Dati di produzione
@@ -89,4 +90,5 @@ export interface MaintenanceAlert {
 	severity: "low" | "medium" | "high";
 	description: string;
 	status: "pending" | "in-progress" | "resolved";
+	estimatedDuration: number; // in minuti
 }
