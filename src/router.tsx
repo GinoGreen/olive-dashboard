@@ -4,6 +4,7 @@ import ProcessingSection from "./components/ProcessingSection";
 import QualitySection from "./components/QualitySection";
 import EnvironmentalSection from "./components/EnvironmentalSection";
 import MachineSection from "./components/MachineSection";
+import HomePage from "./components/HomePage";
 
 const router = createBrowserRouter([
 	{
@@ -11,7 +12,7 @@ const router = createBrowserRouter([
 		children: [
 			{
 				path: "/",
-				element: <></>,
+				element: <HomePage />,
 			},
 			{
 				path: "/processing",
