@@ -92,3 +92,12 @@ export interface MaintenanceAlert {
 	status: "pending" | "in-progress" | "resolved";
 	estimatedDuration: number; // in minuti
 }
+
+export interface Dataset {
+	environmental: EnvironmentalData[];
+	batches: OlivesBatch[];
+	processing: ProcessingParameters[];
+	production: ProductionData[];
+	quality: OilAnalysis[];
+	machineStatus: SystemStatus[];
+}

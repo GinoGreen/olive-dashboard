@@ -78,14 +78,16 @@ class OleificioSimulator {
 			for (const batch of dailyBatches) {
 				const processingData = this.processSimulator.generateProcessingData(
 					batch,
-					envData
+					envData,
+					new Date(batch.arrivalTimestamp)
 				);
 				dataset.processing.push(processingData.parameters);
 				dataset.production.push(processingData.production);
 
 				const qualityData = this.qualitySimulator.generateQualityData(
 					batch,
-					processingData.parameters
+					processingData.parameters,
+					new Date(currentDate)
 				);
 				dataset.quality.push(qualityData);
 			}

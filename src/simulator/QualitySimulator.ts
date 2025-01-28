@@ -44,7 +44,8 @@ class QualitySimulator {
 	 */
 	public generateQualityData(
 		batch: OlivesBatch,
-		params: ProcessingParameters
+		params: ProcessingParameters,
+		timestamp: Date
 	): OilAnalysis {
 		// Determiniamo i fattori base di qualità
 		const qualityFactors = this.calculateQualityFactors(batch, params);
@@ -52,7 +53,7 @@ class QualitySimulator {
 		// Generiamo i valori delle analisi
 		let analysis: OilAnalysis = {
 			batchId: batch.id,
-			timestamp: new Date(),
+			timestamp: timestamp,
 			acidity: this.generateAcidity(qualityFactors),
 			peroxides: this.generatePeroxides(qualityFactors),
 			polyphenols: this.generatePolyphenols(qualityFactors),

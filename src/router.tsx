@@ -1,6 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
 import RootLayout from "./components/layouts/RootLayout";
 import ProcessingSection from "./components/ProcessingSection";
+import QualitySection from "./components/QualitySection";
+import EnvironmentalSection from "./components/EnvironmentalSection";
+import MachineSection from "./components/MachineSection";
 
 const router = createBrowserRouter([
 	{
@@ -14,18 +17,18 @@ const router = createBrowserRouter([
 				path: "/processing",
 				element: <ProcessingSection />,
 			},
-			// {
-			// 	path: "/quality",
-			// 	element: <AreaSelection />,
-			// },
-			// {
-			// 	path: "/envinromental",
-			// 	element: <TableSelection />,
-			// },
-			// {
-			// 	path: "/machine",
-			// 	element: <TableSelection />,
-			// },
+			{
+				path: "/quality",
+				element: <QualitySection />,
+			},
+			{
+				path: "/environmental",
+				element: <EnvironmentalSection />,
+			},
+			{
+				path: "/machine",
+				element: <MachineSection />,
+			},
 		],
 	},
 ]);

@@ -28,7 +28,7 @@ const Sidebar = () => {
 		{
 			icon: Leaf,
 			label: "Ambiente",
-			path: "/environment",
+			path: "/environmental",
 			description: "Gestione ambientale",
 		},
 		{
@@ -43,8 +43,8 @@ const Sidebar = () => {
 		<div className='h-full w-64 border-r bg-background flex flex-col'>
 			{/* Intestazione con il logo/titolo */}
 			<div className='p-6 border-b'>
-				<h1 className='text-xl font-semibold tracking-tight'>
-					Oleificio Dashboard
+				<h1 className='text-xl font-semibold tracking-tight text-center'>
+					Oleificio
 				</h1>
 			</div>
 

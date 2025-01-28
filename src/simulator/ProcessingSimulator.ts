@@ -59,7 +59,8 @@ class ProcessingSimulator {
 	 */
 	public generateProcessingData(
 		batch: OlivesBatch,
-		environmentalData: EnvironmentalData
+		environmentalData: EnvironmentalData,
+		timestamp: Date
 	): {
 		parameters: ProcessingParameters;
 		production: ProductionData;
@@ -67,14 +68,12 @@ class ProcessingSimulator {
 		// Generiamo i parametri di processo
 		const parameters = this.generateProcessingParameters(
 			batch,
-			environmentalData
+			environmentalData,
+			timestamp
 		);
 
 		// Calcoliamo i dati di produzione basati sui parametri
-		const production = this.calculateProduction(
-			batch,
-			parameters,
-		);
+		const production = this.calculateProduction(batch, parameters, timestamp);
 
 		return { parameters, production };
 	}
@@ -85,7 +84,8 @@ class ProcessingSimulator {
 	 */
 	private generateProcessingParameters(
 		batch: OlivesBatch,
-		envData: EnvironmentalData
+		envData: EnvironmentalData,
+		timestamp: Date
 	): ProcessingParameters {
 		// La temperatura di lavorazione è influenzata dalla temperatura ambientale
 		const baseTemp = Math.min(
@@ -103,7 +103,7 @@ class ProcessingSimulator {
 		);
 
 		return {
-			timestamp: new Date(),
+			timestamp: timestamp,
 			grindingTemperature: Number(baseTemp.toFixed(1)),
 			mixingDuration,
 			extractionTemperature: Number((baseTemp - 1).toFixed(1)), // Leggermente più bassa
@@ -130,8 +130,7 @@ class ProcessingSimulator {
 	private calculateCentrifugationSpeed(
 		quality: "premium" | "standard"
 	): number {
-		const speeds =
-			this.OPTIMAL_PARAMETERS.CENTRIFUGE_SPEED[quality];
+		const speeds = this.OPTIMAL_PARAMETERS.CENTRIFUGE_SPEED[quality];
 		const baseSpeed = speeds.optimal;
 
 		// Aggiungiamo una piccola variazione casuale (±2%)
@@ -152,6 +151,7 @@ class ProcessingSimulator {
 	private calculateProduction(
 		batch: OlivesBatch,
 		params: ProcessingParameters,
+		timestamp: Date
 	): ProductionData {
 		// Calcoliamo la resa base in funzione della varietà
 		const varietyYield = this.OPTIMAL_PARAMETERS.YIELD_RATES[batch.variety];
@@ -159,10 +159,7 @@ class ProcessingSimulator {
 			varietyYield.base + (Math.random() - 0.5) * varietyYield.variation;
 
 		// Applichiamo i modificatori basati su vari fattori
-		const yieldModifiers = this.calculateYieldModifiers(
-			batch,
-			params,
-		);
+		const yieldModifiers = this.calculateYieldModifiers(batch, params);
 		const finalYield = baseYield * yieldModifiers.total;
 
 		// Calcoliamo la quantità di olio prodotto
@@ -180,7 +177,7 @@ class ProcessingSimulator {
 
 		return {
 			batchId: batch.id,
-			timestamp: new Date(),
+			timestamp: timestamp,
 			oliveProcessed: batch.weight,
 			oilProduced: Number(oilProduced.toFixed(1)),
 			yield: Number(finalYield.toFixed(2)),
@@ -195,7 +192,7 @@ class ProcessingSimulator {
 	 */
 	private calculateYieldModifiers(
 		batch: OlivesBatch,
-		params: ProcessingParameters,
+		params: ProcessingParameters
 	): {
 		quality: number;
 		temperature: number;
