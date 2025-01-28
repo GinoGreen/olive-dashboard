@@ -270,7 +270,7 @@ const QualitySection = () => {
 										fillOpacity={0.6}
 									/>
 									<Tooltip
-										formatter={(value, name, props) => [
+										formatter={(_, name, props) => [
 											props.payload.value.toFixed(2),
 											name,
 										]}
